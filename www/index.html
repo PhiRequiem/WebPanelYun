@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Control arduino YÚN</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<style>
+		body {
+			margin-top: 90px;
+			text-align: center;
+			font-size: 16px;
+		}
+		span {
+	    font-weight: bold;
+	    font-size: 40px;
+	    font-family: helvetica;
+	    color: rgb(135, 206, 235);
+	    margin-bottom: 10px;
+	    display: block;
+		}
+		.wrap {
+			max-width: 920px;
+		}
+		.dim {
+			padding-top: 30px;
+		}
+		.switch {
+		  position: relative;
+		  display: inline-block;
+		  width: 136px;
+		  height: 68px;
+		  margin-top: 66px;
+		}
+		.switch input {display:none;}
+		.slider {
+		  position: absolute;
+		  cursor: pointer;
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  background-color: rgb(238,238,238);
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+		.slider:before {
+		  position: absolute;
+		  content: "";
+		  height: 52px;
+		  width: 52px;
+		  left: 8px;
+		  bottom: 8px;
+		  background-color: white;
+		  -webkit-transition: .4s;
+		  transition: .4s;
+		}
+		input:checked + .slider {
+		  background-color: rgb(135, 206, 235);;
+		}
+		input:focus + .slider {
+		  box-shadow: 0 0 1px #2196F3;
+		}
+		input:checked + .slider:before {
+		  -webkit-transform: translateX(68px);
+		  -ms-transform: translateX(68px);
+		  transform: translateX(68px);
+		}
+		.slider.round {
+		  border-radius: 34px;
+		}
+		.slider.round:before {
+		  border-radius: 34px;
+		}
+		.navbar-brand {
+			margin-bottom: 0;
+		}
+		.nav>li>a {
+			display: inline-table;
+		}
+	</style>
+</head>
+<body>
+<div class="container wrap">
+	<div class="row">
+		<div class="col-md-4">
+			<div><span>SERVO</span></div>
+			<div class="dim">
+				<input type="text" class="dial" value="0" data-min="0" data-max="180" data-angleArc="200" data-angleOffset="-100">
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div><span>ON/OFF LED</span></div>
+			<div>
+				<label class="switch">
+				<input type="checkbox" onchange=""/>
+				<div class="slider round"></div>
+			</label>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div><span>DIMER LED</span></div>
+			<div>
+				<input type="text" class="dial" value="100" data-min="0" data-max="100">
+			</div>
+		</div>
+	</div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-brand">PhiRequiem</span>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li>
+        	<a href="https://twitter.com/PhiRequiem" target="_blank"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a> 
+        	<a href="https://www.facebook.com/PhiRequiem" target="_blank"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a> 
+        	<a href="https://www.instagram.com/PhiRequiem/" target="_blank"><i class="fa fa-instagram fa-lg" aria-hidden="true"></i></a> 
+        	<a href="https://www.flickr.com/photos/8659835@N04/" target="_blank"><i class="fa fa-flickr fa-lg" aria-hidden="true"></i></a> 
+        	<a href="https://github.com/PhiRequiem" target="_blank"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://twitter.com/hashtag/seguridaddigital" target="_blank">#hagamosdata</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://use.fontawesome.com/30afb3252a.js"></script>
+<script src="jquery.knob.js"></script>
+<script>
+$( document ).ready(function() {
+	$(function() {
+		$(".dial").knob();
+	});
+});
+</script>
+</body>
+</html>
