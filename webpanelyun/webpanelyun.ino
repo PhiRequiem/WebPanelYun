@@ -1,5 +1,7 @@
-// "/arduino/digital/13" -> digitalRead(13)
 // "/arduino/servo/130"  -> myservo.write(130) on pin 3
+// "/arduino/onoff/13" -> digitalRead(13)
+// "/arduino/dimmer/130"  -> analogWrite(ledPin, brightness); on pin5
+
 #include <Bridge.h>
 #include <BridgeServer.h>
 #include <BridgeClient.h>
@@ -45,18 +47,21 @@ void process(BridgeClient client) {
   // read the command
   String command = client.readStringUntil('/');
 
-  // is "digital" command?
-  if (command == "digital") {
-    digitalCommand(client);
+  // el comando es onoff, servo o dimmer
+  if (command == "onoff") {
+    onoff(client);
   }
 
-  // is "servo" command?
   if (command == "servo") {
     servoWrite(client);
   }
+
+  if (command == "dimmer") {
+    dimmer(client);
+  }
 }
 
-void digitalCommand(BridgeClient client) {
+void onoff(BridgeClient client) {
   int pin, value;
 
   // Read pin number
@@ -71,7 +76,13 @@ void digitalCommand(BridgeClient client) {
     value = digitalRead(pin);
   }
 
-  // Send feedback to client
+  client.println("Status: 200");
+  client.println("Access-Control-Allow-Origin: *");   
+  client.println("Access-Control-Allow-Methods: GET");
+  client.println("Content-Type: text/html");
+  client.println("Connection: close");
+  client.println();
+  // Send feedback to client  
   client.print(F("Pin D"));
   client.print(pin);
   client.print(F(" set to "));
@@ -87,4 +98,24 @@ void servoWrite(BridgeClient client) {
   int pos;
   pos = client.parseInt();
   myservo.write(pos);
+
+  client.println("Status: 200");
+  client.println("Access-Control-Allow-Origin: *");   
+  client.println("Access-Control-Allow-Methods: GET");
+  client.println("Content-Type: text/html");
+  client.println("Connection: close");
+  client.println();
+}
+
+void dimmer(BridgeClient client) {
+  int pin = 5, brightness;
+  brightness = client.parseInt();
+  analogWrite(pin, brightness);
+
+  client.println("Status: 200");
+  client.println("Access-Control-Allow-Origin: *");   
+  client.println("Access-Control-Allow-Methods: GET");
+  client.println("Content-Type: text/html");
+  client.println("Connection: close");
+  client.println();
 }

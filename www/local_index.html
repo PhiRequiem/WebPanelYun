@@ -155,14 +155,14 @@ $( document ).ready(function() {
 		$(".servo").knob({
 			'change' : function (v) {
 				var servo = Math.round(v);
-				$.ajax({url: "http://mi_ip_publica/arduino/servo/"+servo});
+				$.ajax({url: "http://arduino.local/arduino/servo/"+servo});
 			}
 		});
 
 		$(".dimmer").knob({
 			'change' : function (v) {
 				var dimmer = Math.round(v); console.log(dimmer);
-				$.ajax({url: "http://mi_ip_publica/arduino/dimmer/"+dimmer});
+				$.ajax({url: "http://arduino.local/arduino/dimmer/"+dimmer});
 			}
 		});
 
@@ -173,7 +173,7 @@ $( document ).ready(function() {
 	    } else {
 	        onoff = 0;
 	    }
-			$.ajax({url: "http://mi_ip_publica/arduino/onoff/13/"+onoff});
+			$.ajax({url: "http://arduino.local/arduino/onoff/13/"+onoff});
 		});
 	});
 });
